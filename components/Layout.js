@@ -1,20 +1,38 @@
-const Layout=(props)=>{
-    const nav=()=>(
-        <ul className="nav">
+import Head from "next/head"
+import Link from "next/link"
+import Router from "next/router"
+import nProgress from "nprogress"
+const Layout = (props) => {
+    const head = () => (
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous" />
+    )
+    const nav = () => (
+        <ul className="nav nav-tabs bg-warning">
             <li className="nav-item">
-                <a className="nav-link" href="">Home</a>
+                <Link href="/">
+                    <a className="nav-link text-dark">Home</a>
+                </Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="">Login</a>
+                <Link href="/login">
+                    <a className="nav-link text-dark">Login</a>
+                </Link>
+
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="">Register</a>
+                <Link href="/register">
+                    <a className="nav-link text-dark">Register</a>
+                </Link>
             </li>
         </ul>
     )
 
-    return<>
-    {nav()} {props.children}
+    return <>
+        {head()} {nav()} <div className="container  pt-5 pb-5">{props.children}</div>
     </>
 }
 
