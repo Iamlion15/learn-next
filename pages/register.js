@@ -19,8 +19,8 @@ const Register = () => {
         console.table(name, email, password)
     }
     const registerForm = () => (
-        <form>
-            <div className="form-group" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
                 <input
                     onChange={handleChange('name')}
                     type="text"
