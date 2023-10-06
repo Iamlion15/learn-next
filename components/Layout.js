@@ -1,6 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import Router from "next/router"
+import { isAuth,logout } from "../helpers/auth"
 import nProgress from "nprogress"
 import 'nprogress/nprogress.css'
 
@@ -41,6 +42,10 @@ const Layout = (props) => {
                 <Link href="/register">
                     <a className="nav-link text-dark">Register</a>
                 </Link>
+            </li>
+            <li className="nav-item">
+
+                    <a onClick={logout} className="nav-link text-dark">Logout</a>
             </li>
         </ul>
     )

@@ -29,7 +29,8 @@ const ActivateAccount=({router})=>{
             console.log("activate account",response);
             setState({...state,name:'',token:'',buttonText:'ACTIVATED',success:response.data.message})
         } catch (error) {
-            setState({...state,buttonText:"Activate account",error:error.reponse.data.error})
+            console.log(error);
+             setState({...state,buttonText:"Activate account",error:error.response.data.error})
         }
     }
     return <Layout>
