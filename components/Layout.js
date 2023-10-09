@@ -1,14 +1,14 @@
 import Head from "next/head"
 import Link from "next/link"
 import Router from "next/router"
-import { isAuth,logout } from "../helpers/auth"
+import { isAuth, logout } from "../helpers/auth"
 import nProgress from "nprogress"
 import 'nprogress/nprogress.css'
 
 
 Router.onRouteChangeStart = url => nProgress.start()
 Router.onRouteChangeComplete = url => nProgress.done()
-Router.onRouteChangeError = url => nProgress.done() 
+Router.onRouteChangeError = url => nProgress.done()
 
 const Layout = (props) => {
     const head = () => (
@@ -32,21 +32,46 @@ const Layout = (props) => {
                     <a className="nav-link text-dark">Home</a>
                 </Link>
             </li>
-            <li className="nav-item">
-                <Link href="/login">
-                    <a className="nav-link text-dark">Login</a>
-                </Link>
+            {!isAuth() && (
+                <>
+                    <li className="nav-item">
+                        <Link href="/login">
+                            <a className="nav-link text-dark">Login</a>
+                        </Link>
 
-            </li>
-            <li className="nav-item">
-                <Link href="/register">
-                    <a className="nav-link text-dark">Register</a>
-                </Link>
-            </li>
-            <li className="nav-item">
-
-                    <a onClick={logout} className="nav-link text-dark">Logout</a>
-            </li>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/register">
+                            <a className="nav-link text-dark">Register</a>
+                        </Link>
+                    </li>
+                </>
+            )}
+            {
+                isAuth() && isAuth().role === 'admin' && (
+                    <li className="nav-item ml-auto">
+                        <Link href="/admin">
+                            <a className="nav-link text-dark">{isAuth().name}</a>
+                        </Link>
+                    </li>
+                )
+            }
+            {
+                isAuth() && isAuth().role === 'subscriber' && (
+                    <li className="nav-item ml-auto">
+                        <Link href="/user">
+                            <a className="nav-link text-dark">{isAuth().name}</a>
+                        </Link>
+                    </li>
+                )
+            }
+            {
+                isAuth && (
+                    <li className="nav-item">
+                        <a onClick={logout} className="nav-link text-dark">Logout</a>
+                    </li>
+                )
+            }
         </ul>
     )
 
